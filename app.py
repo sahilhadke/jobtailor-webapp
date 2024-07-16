@@ -15,19 +15,21 @@ except AttributeError:
 # Function to process the inputs and generate output links
 def process_inputs(api_key, resume_file, job_description):
     # Example processing function - replace with your actual processing logic
-    # print(type(resume_file))
-    optional_params = {
-        "write_function": placeholder_status.text,
-        # "pdflatex_path": '/usr/local/texlive/2024/bin/universal-darwin/pdflatex',
-    }
-    jt = JobTailor(resume_file, job_description, api_key, optional_params)
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Create a temporary file path
+        temp_directory = f"{temp_dir}/output/"
+        optional_params = {
+            "write_function": placeholder_status.text,
+            # "pdflatex_path": '/usr/local/texlive/2024/bin/universal-darwin/pdflatex',
+            "output_dir": temp_directory,
+        }
+        jt = JobTailor(resume_file, job_description, api_key, optional_params)
 
-    # Dummy links - replace with actual links generated from your processing
-    resume_file_path = jt.tailored_resume_path
-    coverletter_file_path = jt.tailored_coverletter_path
-    # resume_file_path = "Test1"
-    # coverletter_file_path = "jt.tailored_coverletter_path"
-    return resume_file_path, coverletter_file_path
+        # Dummy links - replace with actual links generated from your processing
+        resume_file_path = jt.tailored_resume_path
+        coverletter_file_path = jt.tailored_coverletter_path
+
+        return resume_file_path, coverletter_file_path
 
 # Streamlit app
 st.title("JobTailor Streamlit App")
