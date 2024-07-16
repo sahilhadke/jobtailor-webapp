@@ -1,2 +1,2 @@
 streamlit
-jobtailor
+jobtailor==0.1.3
