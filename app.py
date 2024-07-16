@@ -17,7 +17,8 @@ def process_inputs(api_key, resume_file, job_description):
     # Example processing function - replace with your actual processing logic
     # print(type(resume_file))
     optional_params = {
-        "pdflatex_path": '/usr/local/texlive/2024/bin/universal-darwin/pdflatex',
+        "write_function": placeholder_status.text,
+        # "pdflatex_path": '/usr/local/texlive/2024/bin/universal-darwin/pdflatex',
     }
     jt = JobTailor(resume_file, job_description, api_key, optional_params)
 
@@ -39,6 +40,8 @@ uploaded_file = st.file_uploader("Upload your PDF resume", type="pdf")
 
 # Text input field for job description
 job_description = st.text_area("Enter the job description")
+
+placeholder_status = st.empty()
 
 # Button to process the inputs
 if st.button("Generate Personalized Resume and Cover Letter"):
